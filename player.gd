@@ -1,7 +1,7 @@
-extends Node3D
+extends RigidBody3D
 
-var rotation_speed: float = 1.0
-var move_speed: float = 2.0
+var rotation_torque: float = 1.0
+var thrust_force: float = 20.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,12 +11,13 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# Rotate left/right
-	if Input.is_key_pressed(KEY_LEFT):
-		rotate_z(rotation_speed * delta)
-	if Input.is_key_pressed(KEY_RIGHT):
-		rotate_z(-rotation_speed * delta)
+	if Input.is_action_pressed("rotate_left"):
+		apply_torque(Vector3(0, 0, rotation_torque))
+	if Input.is_action_pressed("rotate_right"):
+		apply_torque(Vector3(0, 0, -rotation_torque))
 	
 	# Move forward in facing direction
-	if Input.is_key_pressed(KEY_SPACE):
+	if Input.is_action_pressed("boost"):
 		var forward = transform.basis.y
-		position += Vector3(forward.x, forward.y, 0).normalized() * move_speed * delta
+		var thrust = Vector3(forward.x, forward.y, 0).normalized() * thrust_force
+		apply_central_force(thrust)
