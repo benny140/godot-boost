@@ -75,13 +75,17 @@ public partial class Player : RigidBody3D
             stabilityTimer += delta;
             if (stabilityTimer >= StabilityThreshold)
             {
+                var tween = CreateTween();
+                tween.TweenInterval(1.0);
                 if (landingPad is LandingPad pad && !string.IsNullOrEmpty(pad.LevelCompleteScene))
                 {
-                    GetTree().ChangeSceneToFile(pad.LevelCompleteScene);
+                    tween.TweenCallback(
+                        Callable.From(() => GetTree().ChangeSceneToFile(pad.LevelCompleteScene))
+                    );
                 }
                 else
                 {
-                    GetTree().Quit();
+                    tween.TweenCallback(Callable.From(() => GetTree().Quit()));
                 }
             }
         }
