@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://goxxji6kr860"]
 
 [ext_resource type="PackedScene" uid="uid://bk86moyg6nt0k" path="res://player.tscn" id="1_80vhd"]
-[ext_resource type="Script" uid="uid://3mw8tvwiubb4" path="res://levels/landing_pad.gd" id="2_hjsbj"]
+[ext_resource type="Script" uid="uid://bv6ykcdojs8cf" path="res://levels/LandingPad.cs" id="2_hjsbj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5xgho"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -55,7 +55,7 @@ use_collision = true
 size = Vector3(2, 0.4, 2)
 material = SubResource("StandardMaterial3D_vonw3")
 script = ExtResource("2_hjsbj")
-level_complete_scene = "uid://hiantfun2eqg"
+LevelCompleteScene = "uid://hiantfun2eqg"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.98480767, 0.17364816, 0, -0.17364816, 0.98480767, 0, 5, 10)
